@@ -1671,6 +1671,8 @@ static struct ctl_table fs_table[] = {
 	{ }
 };
 
+int rjm_pgt_dump_process_id = -1;
+
 static struct ctl_table debug_table[] = {
 #ifdef CONFIG_SYSCTL_EXCEPTION_TRACE
 	{
@@ -1692,7 +1694,14 @@ static struct ctl_table debug_table[] = {
 		.extra2		= &one,
 	},
 #endif
-	{ }
+    {
+        .procname = "pgt_dump_process_id",
+        .data = &rjm_pgt_dump_process_id,
+        .maxlen = sizeof(int),
+        .mode = 0644,
+        .proc_handler = proc_dointvec
+    },
+    { }
 };
 
 static struct ctl_table dev_table[] = {
